@@ -72,11 +72,11 @@
             alert("Welcome User");
         });
         $(document).ready(e => {
-            let c = $('#Kelvin')[0],
+            let c = $('#Kelvin'),
                 convertir = $('#convertir')[0];
 
             convertir.onclick = e => {
-                $.post("http://localhost:3006", c.value, resp => {
+                $.post("http://localhost:3006", c.val(), resp => {
                     $('#resultado').text(resp);
                     $('#resultado').css('background-color', 'black')
                 });
