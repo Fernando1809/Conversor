@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Conversor de Kelvin a Celcius</title>
+    <style>
+       
+        #celsius {
+            margin: 10px;
+            width: 300px;
+            height: 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: .5px solid rgb(218, 20, 142);
+        }
+        #convertir {
+            font-size: 10px;
+            margin: 10px;
+            background-color: rgb(245, 11, 233);
+            width: 90px;
+            height: 20px;
+          
+            text-decoration: none;
+            border: none;
+            border-radius: 26px;
+            color: rgb(21, 231, 14);
+        }
+        #convertir:hover {
+            background-color: black;
+        }
+        #convertir:active {
+            background-color: white;
+        }
+        #resultado {
+            margin: 100px auto;
+            padding: 5px;
+            border-radius: 5px;
+            width: 300px;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        #conversor {
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+            border: solid 1px purple;
+            border-top: 20px solid red;
+            font-family: serif;
+            font-size: 1em;
+            width: 500px;
+            min-height: 200px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="conversorkc">
+        <h1>Conversor de Kelvin a Celcius</h1>
+        <input type="number" name=" Kelvin" id="Kelv"><br>
+        <button id="convertir">Convertir</button>
+
+        <p>Prediccion:</p>
+        <div id="resultado"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', e=>{
+            alert("Welcome User");
+        });
+        $(document).ready(e => {
+            let c = $('#Kelvin')[0],
+                convertir = $('#convertir')[0];
+
+            convertir.onclick = e => {
+                $.post("http://localhost:3006", c.value, resp => {
+                    $('#resultado').text(resp);
+                    $('#resultado').css('background-color', 'black')
+                });
+            }
+        });
+    </script>
+</body>
+</html>
