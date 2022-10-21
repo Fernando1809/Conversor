@@ -17,32 +17,14 @@ class servidorBasico(BaseHTTPRequestHandler):
         
         self.end_headers()
         self.wfile.write(bytes(file_to_open, 'utf-8'))
-        
-        self.send_header('Content-type', 'text/html')
         self.end_headers()
-        self.wfile.write("PageWeb.html".encode())
     
     def do_POST(self):
-        print("Peticion recibida por POST")
-
-        content_length = int(self.headers['Content-Length'])
-        data = self.rfile.read(content_length)
-        data = data.decode()
-        data = parse.unquote(data)
-        
-        matriz = np.fromstring(data, np.float32, sep=',')
-        matriz = matriz.reshape(28,28)
-        matriz = np.array(matriz)
-        matriz = matriz.reshape(1,28,28,1)
-        
-        prediccion = modelo.predict(matriz,batch_size=1)
-        prediccion = str(np.argmax(prediccion))
-        print(prediccion)
-
-        self.send_response(200)
-        self.send_header("Access-Control-Allow-Origin","*")
-        self.end_headers()
-        self.wfile.write(prediccion.encode())
+     if self.path == '/PageWeb.html':
+         SimpleJSONRPCRequestHandler.do_POST(self)
+     else:
+         __pychecker__ = 'no-classattr'
+         SimpleHTTPRequestHandler.do_POST(self)
 
 print("Server Python :D")
 servidor = HTTPServer(("localhost", 3006), servidorBasico)
